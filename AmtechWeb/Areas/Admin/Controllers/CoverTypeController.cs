@@ -2,11 +2,14 @@
 using Amtech.DataAccess;
 using Amtech.DataAccess.Repository.IRepository;
 using Amtech.Models;
+using Amtech.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AmtechWeb.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class CoverTypeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

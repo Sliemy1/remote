@@ -1,6 +1,7 @@
 ﻿using Amtech.DataAccess.Repository.IRepository;
 using Amtech.Models;
 using Amtech.Models.ViewModels;
+using Amtech.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -54,12 +55,16 @@ namespace AmtechWeb.Controllers
             {
 
                 _unitOfWork.ShoppingCart.Add(shoppingCart);
+                _unitOfWork.Save();
+                HttpContext.Session.SetInt32(SD.SessionCart,
+                 _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == claim.Value).ToList().Count);
             }
             else
             {
                 _unitOfWork.ShoppingCart.IncrementCount(cartFromDb, shoppingCart.Count);
+                _unitOfWork.Save();
             }
-            _unitOfWork.Save();
+            
 
             return RedirectToAction(nameof(Index));
         }

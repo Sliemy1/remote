@@ -12,11 +12,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Amtech.Utility;
 
 namespace AmtechWeb.Controllers;
 
     [Area("Admin")]
-    public class ProductController : Controller
+    [Authorize(Roles = SD.Role_Admin)]
+public class ProductController : Controller
     {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IWebHostEnvironment _hostEnvironment;
