@@ -10,6 +10,7 @@ namespace Amtech.Models
 {
     public class CoverType
     {
+        //This is the cover type table
         [Key]
         public int Id { get; set; }
         [Display(Name ="Cover Type")]
